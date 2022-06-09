@@ -76,8 +76,30 @@ function moveInvaders() {
     resultsDisplay.textContent = 'GAME OVER';
     clearInterval(invadersID);
   }
+
+  for (let i = 0; i < alienInvaders.length; i++) {
+    if (alienInvaders[i] > squares.length) {
+      resultsDisplay.textContent = 'GAME OVER';
+      clearInterval(invadersID);
+    }
+  }
+}
+
+invadersID = setInterval(moveInvaders, 100);
+
+function shoot(e) {
+  let laserId;
+  let currentLaserIndex = currentShooterIndex;
+  function moveLaser() {
+    squares[currentLaserIndex].classList.remove('laser');
+    currentLaserIndex -= width;
+    squares[currentLaserIndex].classList.add('laser');
+  }
+  switch (e.key) {
+    case 'ArrowUp':
+      laserId = setInterval(moveLaser, 100);
+  }
 }
 
 document.addEventListener('keydown', moveShooter);
-
-invadersID = setInterval(moveInvaders, 100);
+document.addEventListener('keydown', shoot);
