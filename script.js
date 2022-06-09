@@ -7,6 +7,7 @@ let width = 15;
 let direction = 1;
 let invadersID;
 let goRight = true;
+let aliensKilled = [];
 
 for (let i = 0; i < 225; i++) {
   const square = document.createElement('div');
@@ -22,7 +23,9 @@ const alienInvaders = [
 
 function drawInvader() {
   for (let i = 0; i < alienInvaders.length; i++) {
-    squares[alienInvaders[i]].classList.add('invader');
+    if (!aliensKilled.includes(i)) {
+      squares[alienInvaders[i]].classList.add('invader');
+    }
   }
 }
 drawInvader();
@@ -94,6 +97,22 @@ function shoot(e) {
     squares[currentLaserIndex].classList.remove('laser');
     currentLaserIndex -= width;
     squares[currentLaserIndex].classList.add('laser');
+
+    if (squares[currentLaserIndex].classList.contains('invader')) {
+      squares[currentLaserIndex].classList.remove('laser');
+      squares[currentLaserIndex].classList.remove('invader');
+      squares[currentLaserIndex].classList.add('boom');
+
+      setTimeout(
+        () => squares[currentLaserIndex].classList.remove('boom'),
+        300
+      );
+      clearInterval(laserId);
+
+      const alienKilled = alienInvaders.indexOf(currentLaserIndex);
+      aliensKilled.push(alienKilled);
+      console.log(aliensKilled);
+    }
   }
   switch (e.key) {
     case 'ArrowUp':
