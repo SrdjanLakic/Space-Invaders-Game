@@ -19,7 +19,8 @@
   background-size: contain;
 }
 .shooter {
-  background-color: green;
+  background-image: url('Space-ship.png');
+  background-size: contain;
 }
 
 .laser {
