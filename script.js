@@ -2,6 +2,7 @@
 
 const grid = document.querySelector('.grid');
 const resultsDisplay = document.querySelector('.result');
+let result = 0;
 let currentShooterIndex = 202;
 let width = 15;
 let direction = 1;
@@ -86,9 +87,13 @@ function moveInvaders() {
       clearInterval(invadersID);
     }
   }
+  if (aliensKilled.length === alienInvaders.length) {
+    resultsDisplay.textContent = 'YOU WIN 🏆';
+    clearInterval(invadersID);
+  }
 }
 
-invadersID = setInterval(moveInvaders, 100);
+invadersID = setInterval(moveInvaders, 500);
 
 function shoot(e) {
   let laserId;
@@ -111,7 +116,8 @@ function shoot(e) {
 
       const alienKilled = alienInvaders.indexOf(currentLaserIndex);
       aliensKilled.push(alienKilled);
-      console.log(aliensKilled);
+      result++;
+      result.tex;
     }
   }
   switch (e.key) {
